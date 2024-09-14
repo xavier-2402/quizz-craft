@@ -1,0 +1,25 @@
+<nz-layout id="main-layout">
+    <div id="sidebar-menu" *ngIf="showSidebar" (mouseleave)="onMouseOut()">
+        <nz-row>
+            <nz-col>
+                <h2>Quizz Craft</h2>
+            </nz-col>
+            <nz-col class="icon-sidebar">
+                <i [class]="isStatic ? 'fa-solid fa-angles-left' : 'fa-solid fa-thumbtack'" (click)="isStatic = !isStatic"></i>
+            </nz-col>
+
+        </nz-row>
+        <ul>
+            <li>
+                asdasdas
+            </li>
+            <li>
+                asdasad
+            </li>
+        </ul>
+    </div>
+    <div id="simple-sidebar" *ngIf="!showSidebar" (mouseover)="onMouseOver()">
+        <h2>Quizz Craft</h2>
+        <nz-avatar nzText="U" id="avatar"></nz-avatar>
+    </div>
+</nz-layout>

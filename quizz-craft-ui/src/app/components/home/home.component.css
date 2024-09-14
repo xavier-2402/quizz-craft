@@ -1,0 +1,41 @@
+.inner-content {
+    padding: 0 24px; 
+    background: #f0f2f5;
+    min-height: 360px;
+}
+
+#main-layout{
+    height: 100%;
+}
+
+#sidebar-menu{
+    background-color: #dddd;
+    height: 100%;
+    width: 270px;
+    border: 1px solid #9ea1a5;
+    border-radius: 0 12px 12px 0;
+    padding: 10px;
+} 
+
+#simple-sidebar{
+    padding: 10px;
+    height: 100%;
+    width: 150px;
+
+}
+
+#avatar{
+    position: fixed;
+    bottom: 5px;
+    left: 5px;
+    padding: 20px;
+    cursor: pointer;
+}
+
+#avatar:hover {
+    background-color: lightcoral;
+}
+
+.icon-sidebar{
+    margin-left: auto;
+}
