@@ -24,18 +24,58 @@
 
 }
 
-#avatar{
-    position: fixed;
-    bottom: 5px;
-    left: 5px;
-    padding: 20px;
-    cursor: pointer;
+#quizz-craft-simple-sidebar{
+    color: #646566;
 }
 
-#avatar:hover {
-    background-color: lightcoral;
+#avatar{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    padding: 20px;
+    display: table-caption;
 }
 
 .icon-sidebar{
     margin-left: auto;
 }
+
+nz-avatar {
+    margin-top: 16px;
+    margin-right: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.item-sidebar{
+    margin-top: 20px;
+}
+
+.custom-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.custom-list li {
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: 5px;
+    transition: box-shadow 0.3s;
+}
+
+.custom-list li:hover {
+    background-color: #aeaeae;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.item-list{
+    max-width: 95%;
+}
+
+.item-container{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }

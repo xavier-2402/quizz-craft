@@ -10,7 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { es_ES } from 'ng-zorro-antd/i18n';
 import { IconsProviderModule } from './icons-provider.module';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HomeComponent } from './components/home/home.component';
 import { NewChatComponent } from './components/new-chat/new-chat.component';
 import { ChatComponent } from './components/chat/chat.component';
@@ -18,7 +17,6 @@ import { ChatComponent } from './components/chat/chat.component';
 @NgModule({
   declarations: [
     AppComponent,
-    SidebarComponent,
     HomeComponent,
     NewChatComponent,
     ChatComponent
