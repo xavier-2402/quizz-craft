@@ -9,20 +9,9 @@
 }
 
 #sidebar-menu{
-    background-color: #dddd;
-    height: 100%;
-    width: 270px;
-    border: 1px solid #9ea1a5;
-    border-radius: 0 12px 12px 0;
-    padding: 10px;
+    background-color: #f0f2f5;
 } 
 
-#simple-sidebar{
-    padding: 10px;
-    height: 100%;
-    width: 150px;
-
-}
 
 #quizz-craft-simple-sidebar{
     color: #646566;
@@ -78,4 +67,25 @@ nz-avatar {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
+}
+
+.navbar-200 {
+    width: calc(100% - 200px)
+}
+
+.content-collapsed {
+    padding: 10px;
+    height: 100%;
+    max-width: 90%;
+}
+
+.content-expanded {
+    background-color: #dddd;
+    min-height: 100%;
+    width: 100%;
+    border: 1px solid #9ea1a5;
+    border-radius: 0 12px 12px 0;
+    padding: 10px;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
