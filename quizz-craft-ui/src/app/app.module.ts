@@ -13,13 +13,17 @@ import { IconsProviderModule } from './icons-provider.module';
 import { HomeComponent } from './components/home/home.component';
 import { NewChatComponent } from './components/new-chat/new-chat.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { MessageBarComponent } from './components/message-bar/message-bar.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NewChatComponent,
-    ChatComponent
+    ChatComponent,
+    MessageBarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

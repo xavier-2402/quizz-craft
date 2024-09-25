@@ -4,19 +4,29 @@ import { NZ_ICONS, NzIconModule } from 'ng-zorro-antd/icon';
 import {
     AppstoreOutline,
     EditOutline,
+    EyeOutline,
+    FilePdfFill,
+    FilePptFill,
     HomeOutline,
+    LockOutline,
     MailOutline,
+    SendOutline,
     SettingOutline,
-    UserOutline
+    UserOutline,
 } from '@ant-design/icons-angular/icons';
 
 const icons = [
     AppstoreOutline,
     EditOutline,
+    EyeOutline,
+    FilePdfFill,
+    FilePptFill,
     HomeOutline,
+    LockOutline,
     MailOutline,
+    SendOutline,
     SettingOutline,
-    UserOutline
+    UserOutline,
 ];
 
 @NgModule({

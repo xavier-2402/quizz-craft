@@ -1,0 +1,12 @@
+<div class="chat-input">
+    <nz-row [nzGutter]="[8,8]">
+        <nz-col nzSpan="23">
+            <textarea nz-input placeholder="Escribe un mensaje..." class="input-textarea"
+            [nzAutosize]="{ minRows: 2, maxRows: 6 }"
+            [(ngModel)]="userMessage" (keyup.enter)="manageMessage()" ></textarea>
+        </nz-col>
+        <nz-col nzSpan="1">
+            <button nz-button nzType="primary" (click)="manageMessage()"><span nz-icon nzType="send" nzTheme="outline"></span></button>
+        </nz-col>
+    </nz-row>
+</div>

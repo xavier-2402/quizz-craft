@@ -1,1 +1,15 @@
-<p>chat works!</p>
+<nz-row nzJustify="center">
+    <nz-col nzMd="16" nzXs="24">
+        <div class="chat-container">
+            <nz-row class="chat-messages" >
+              <nz-col [nzSpan]="24">
+                <div *ngFor="let chat of chatMessages" [ngClass]="{'user-message': chat.sender === 'user', 'bot-message': chat.sender === 'bot'}">
+                  <p>{{chat.message}}</p>
+                </div>
+              </nz-col>
+            </nz-row>
+            <app-message-bar (sendMessage)="sendMessage($event)"></app-message-bar>
+          </div>
+    </nz-col>
+</nz-row>
+  

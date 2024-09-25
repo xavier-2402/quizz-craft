@@ -1,8 +1,17 @@
+
 .inner-content {
     padding: 0 24px; 
     background: #f0f2f5;
-    min-height: 360px;
+    justify-content: center; 
+    transition: all 0.3s ease; 
+    width: 100%;
 }
+
+.inner-content.collapsed {
+    width: calc(100% - 150px); 
+    margin-right: 150px;
+}
+  
 
 #main-layout{
     height: 100%;
@@ -82,7 +91,7 @@ nz-avatar {
 .content-expanded {
     background-color: #dddd;
     min-height: 100%;
-    width: 100%;
+    min-width: 100%;
     border: 1px solid #9ea1a5;
     border-radius: 0 12px 12px 0;
     padding: 10px;

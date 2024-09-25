@@ -1,0 +1,56 @@
+.chat-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+  
+.chat-options {
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+  
+
+.item-content{
+  border: #b1b1b1 1px solid;
+  border-radius: 10px;
+  width: 30%;
+}
+
+.title-new-chat{
+  font-size: 2.9rem;
+  font-weight: normal;
+}
+
+.cards-options{
+  margin-top: 50px;
+  justify-content: space-evenly;
+  border: #b1b1b1 1px solid;
+  border-radius: 15px;
+  padding: 22px 0;
+  background-color: #e9e9e9;
+}
+
+.btn-option{
+  height: 80px;
+  width: 100%;
+  padding: 15px;
+}
+
+.icon-ppt{
+  color: #d14523;
+}
+
+.icon-pdf{
+  color: #e70707;
+}
+
+.icon-diagram{
+  color: #1c5f81;
+}
+
+.item-container{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

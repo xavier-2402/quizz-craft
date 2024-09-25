@@ -1,7 +1,7 @@
 <nz-layout id="main-layout">
     <nz-sider id="sidebar-menu" 
         [nzCollapsed]="!showSidebar"
-        [nzCollapsedWidth]="160"
+        [nzCollapsedWidth]="150"
         [nzTrigger]="null"
         [nzWidth]="270"
         (mouseleave)="onMouseOut()"
@@ -18,11 +18,11 @@
                 </nz-col>
             </nz-row>
             <nz-row>
-                <button nz-button nzBlock><i class="fa-regular fa-comment icon"></i> Nuevo chat</button>
+                <button nz-button nzBlock [routerLink]="['/']" ><i class="fa-regular fa-comment icon"></i> Nuevo chat</button>
             </nz-row>
             <h3 class="item-sidebar">Recientes</h3>
             <ul class="custom-list">
-                <li class="item-list">
+                <li class="item-list" [routerLink]="['/chat']">
                     <div class="item-container">
                         <i class="fa-regular fa-comment icon"></i> asdasdas45sdff4sd5f4asd54fs5d4fas5d4f5s4ds54d
                     </div>
@@ -45,8 +45,12 @@
 
     <nz-layout>
         <nz-content>
-            <div class="inner-content">
-              <router-outlet></router-outlet>
+            <nz-row nzJustify="center"  class="inner-content" [ngClass]="{'collapsed': !showSidebar, 'expanded': showSidebar}">
+                <nz-col nzSpan="24" style="text-align: center;">
+                    <router-outlet></router-outlet>
+                </nz-col>
+            </nz-row>
+            <div>
             </div>
         </nz-content>
     </nz-layout>

@@ -1,0 +1,44 @@
+<div class="login-container" >
+    <div nz-row style="height: 100%;">
+        <div nz-col nzMd="16" nzXs="24">            
+              <nz-carousel nzDotPosition="bottom" nzAutoPlay>
+                <div nz-carousel-content *ngFor="let index of array">
+                 <object [data]="index.urlsafe" style="width:40%"> </object>
+                </div>
+              </nz-carousel>
+        </div>
+        <div nz-col nzMd="8" nzXs="24" class="login-section" >
+            <img [src]="logo" alt="logo-ktk" width="100%" id="img-logo" onerror="this.src='../../../assets/images/no-image.png'">          
+            <form nz-form [formGroup]="form" class="login-form" (ngSubmit)="submitForm()">
+                <nz-form-item>
+                  <nz-form-control nzSpan="24" nzErrorTip="Por favor ingrese su nombre de usuario!">
+                    <nz-input-group nzPrefixIcon="user" class="login-input">
+                      <input type="text" nz-input formControlName="username" placeholder="Username" />
+                    </nz-input-group>
+                  </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                  <nz-form-control nzSpan="24" nzErrorTip="Por favor ingrese su contraseña!">
+                    <nz-input-group  nzPrefixIcon="lock" [nzSuffix]="suffixTemplate" class="login-input">
+                      <input [type]="passwordVisible ? 'text' : 'password'" nz-input formControlName="password" placeholder="Password" />
+                      <ng-template #suffixTemplate>
+                        <span
+                          nz-icon
+                          [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                          (click)="passwordVisible = !passwordVisible"
+                        ></span>
+                      </ng-template>
+                    </nz-input-group>
+                  </nz-form-control>
+                </nz-form-item>
+                <div nz-row class="login-form-margin">                  
+                  <div nz-col [nzSpan]="24">
+                    <a class="login-form-forgot" routerLink="/forget-password" >Olvide mi contraseña</a>
+                  </div>
+                </div>
+                <button [nzLoading]="loading" nz-button class="login-form-button login-form-margin" [nzType]="'primary'"  id="login">Iniciar Sesión</button>     
+              </form>     
+        </div>
+        
+      </div>
+</div>

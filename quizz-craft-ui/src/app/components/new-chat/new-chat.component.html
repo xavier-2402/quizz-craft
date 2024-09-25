@@ -1,1 +1,22 @@
-<p>new-chat works!</p>
+<nz-row nzJustify="center">
+    <nz-col nzXs="24" nzMd="20"  nzLg="16">
+        <div class="chat-container">
+            <nz-row class="chat-options" nzAlign="middle">
+              <nz-col [nzSpan]="24">
+                <h1 class="title-new-chat"><i class="fa-regular fa-comment icon"></i> Hola, Xavier</h1>
+                <nz-row class="cards-options">
+                    <nz-col nzMd="7" nzXs="24" class="item-content " *ngFor="let c of cards">
+                      <button nz-button nzType="text" class="btn-option item-container">
+                        <span nz-icon [nzType]="c.icon" nzTheme="fill" [class]="c.icon_class" *ngIf="c.icon_type == 1"></span> 
+                        <i [class]="c.icon +' icon'" [ngClass]="c.icon_class" *ngIf="c.icon_type == 2"></i>
+                        {{c.title}}
+                      </button>
+                    </nz-col>
+                </nz-row>
+              </nz-col>
+            </nz-row>
+            <app-message-bar></app-message-bar>
+          </div>
+    </nz-col>
+</nz-row>
+  
