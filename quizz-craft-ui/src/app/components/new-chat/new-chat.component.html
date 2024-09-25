@@ -4,9 +4,9 @@
             <nz-row class="chat-options" nzAlign="middle">
               <nz-col [nzSpan]="24">
                 <h1 class="title-new-chat"><i class="fa-regular fa-comment icon"></i> Hola, Xavier</h1>
-                <nz-row class="cards-options">
+                <nz-row class="cards-options" [nzGutter]="[16,16]">
                     <nz-col nzMd="7" nzXs="24" class="item-content " *ngFor="let c of cards">
-                      <button nz-button nzType="text" class="btn-option item-container">
+                      <button nz-button nzType="text" class="btn-option item-container" [nz-tooltip]="c.title">
                         <span nz-icon [nzType]="c.icon" nzTheme="fill" [class]="c.icon_class" *ngIf="c.icon_type == 1"></span> 
                         <i [class]="c.icon +' icon'" [ngClass]="c.icon_class" *ngIf="c.icon_type == 2"></i>
                         {{c.title}}
