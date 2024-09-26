@@ -20,6 +20,9 @@ export class ForgetPasswordComponent {
     }
   ]
 
+  password:string = null;
+  secondPassword:string = null;
+
   constructor(private msg: NzMessageService){
 
   }
@@ -29,5 +32,16 @@ export class ForgetPasswordComponent {
       this.msg.warning('Ingrese todos los valores')
       return;
     }
+    this.section = 2;
+  }
+
+  isValid():boolean{
+    if(this.password == null) return false;
+    if(this.secondPassword == null) return false;
+    return this.password == this.secondPassword;
+  }
+
+  updatePassword(){
+    this.section = 3;
   }
 }
