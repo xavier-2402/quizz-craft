@@ -39,12 +39,18 @@
     font-size: medium;
 }
 
+.icon-drawer{
+    font-size: medium;
+}
+
 nz-avatar {
     margin-top: 16px;
     margin-right: 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    background-color: #07294d;
+    color: #fff;
 }
 
 .item-sidebar{
@@ -122,3 +128,17 @@ nz-avatar {
     box-sizing: border-box;
 }
 
+@media (max-width: 768px) {
+    .inner-content.collapsed {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    #sidebar-menu{
+        display: none;
+    }
+
+    .content-expanded{
+        border-radius: 12px;
+    }
+}

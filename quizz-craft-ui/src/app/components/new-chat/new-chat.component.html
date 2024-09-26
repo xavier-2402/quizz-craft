@@ -3,7 +3,7 @@
         <div class="chat-container">
             <nz-row class="chat-options" nzAlign="middle">
               <nz-col [nzSpan]="24">
-                <h1 class="title-new-chat"><i class="fa-regular fa-comment icon"></i> Hola, Xavier</h1>
+                <h1 class="title-new-chat"><i class="fa-regular fa-comment icon"></i> Hola, {{user.first_name}}</h1>
                 <nz-row class="cards-options" [nzGutter]="[16,16]">
                     <nz-col nzMd="7" nzXs="24" class="item-content " *ngFor="let c of cards">
                       <button nz-button nzType="text" class="btn-option item-container" [nz-tooltip]="c.title">

@@ -6,55 +6,37 @@
         [nzBreakpoint]="'md'"
         [nzWidth]="270"
         class="nz-sider">
-
-        <div class="content-expanded" *ngIf="showSidebar">
-            <nz-row>
-                <nz-col>
-                    <h2>Quizz Craft</h2>
-                </nz-col>
-                <nz-col class="icon-sidebar">
-                    <i class="fa-solid fa-angles-left" (click)="showSidebar = false"></i>
-                </nz-col>
-            </nz-row>
-            <nz-row>
-                <button nz-button nzBlock [routerLink]="['/']" ><i class="fa-regular fa-comment icon"></i> Nuevo chat</button>
-            </nz-row>
-            <h3 class="item-sidebar">Recientes</h3>
-            <ul class="custom-list">
-                <li class="item-list" [routerLink]="['/chat']">
-                    <div class="item-container">
-                        <i class="fa-regular fa-comment icon"></i> asdasdas45sdff4sd5f4asd54fs5d4fas5d4f5s4ds54d
-                    </div>
-                </li>
-                <li class="item-list">
-                    <div class="item-container"> 
-                        <i class="fa-regular fa-comment icon"></i>asdasada6sddsfs5s6d5f6sd5fs6df5sdkjjjjjjjjjjjjjjjjjjjjjjjjjjj
-                    </div>
-                </li>
-            </ul>
-            <button nz-button nzBlock nz-dropdown [nzDropdownMenu]="menu" class="sider-footer">
-                Xavier Yanza
-            </button>
-        </div>
-        <div  class="content-collapsed" *ngIf="!showSidebar">
-            <nz-row class="quizz-craft-simple-sidebar">
-                <nz-col>
-                    <h2 class="quizz-craft-simple-sidebar">Quizz Craft </h2> 
-                </nz-col>
-                <nz-col class="icon-sidebar">
-                    <i class="fa-solid fa-angles-right" (click)="showSidebar = true"></i>
-                </nz-col>
-            </nz-row>
-           
-            <div id="avatar" (click)="showSidebar = true" >
-                <nz-avatar nzText="U" ></nz-avatar>
-            </div>
+        <div style="height: 100%;">
+            <ng-container *ngTemplateOutlet="sideContent"></ng-container>
         </div>
     </nz-sider>
+
+    <nz-drawer *ngIf="isMobile"
+      [nzClosable]="false"
+      [nzVisible]="showSidebar"
+      nzPlacement="left"
+      (nzOnClose)="close()"
+      id="drawer-menu"
+      nzWidth="250px"
+    >
+      <ng-container *nzDrawerContent>
+        <div style="height: 100%;">
+            <ng-container *ngTemplateOutlet="sideContent"></ng-container>
+        </div>
+      </ng-container>
+    </nz-drawer>
 
 
     <nz-layout>
         <nz-content>
+            <nz-row *ngIf="isMobile" [nzGutter]="[16,16]">
+                <nz-col>
+                    <h2 class="quizz-craft-simple-sidebar">Quizz Craft </h2> 
+                </nz-col>
+                <nz-col class="icon-drawer">
+                    <i class="fa-solid fa-angles-right" (click)="showSidebar = true"></i>
+                </nz-col>
+            </nz-row>
             <nz-row nzJustify="center" class="inner-content" [ngClass]="{'collapsed': !showSidebar, 'expanded': showSidebar}">
                 <nz-col nzSpan="24" style="text-align: center;">
                     <router-outlet></router-outlet>
@@ -63,6 +45,52 @@
         </nz-content>
     </nz-layout>
 </nz-layout>
+
+<ng-template #sideContent>
+    <div class="content-expanded" *ngIf="showSidebar">
+        <nz-row>
+            <nz-col>
+                <h2>Quizz Craft</h2>
+            </nz-col>
+            <nz-col class="icon-sidebar">
+                <i class="fa-solid fa-angles-left" (click)="showSidebar = false"></i>
+            </nz-col>
+        </nz-row>
+        <nz-row>
+            <button nz-button nzBlock [routerLink]="['/']" ><i class="fa-regular fa-comment icon"></i> Nuevo chat</button>
+        </nz-row>
+        <h3 class="item-sidebar">Recientes</h3>
+        <ul class="custom-list">
+            <li class="item-list" [routerLink]="['/chat']">
+                <div class="item-container">
+                    <i class="fa-regular fa-comment icon"></i> asdasdas45sdff4sd5f4asd54fs5d4fas5d4f5s4ds54d
+                </div>
+            </li>
+            <li class="item-list">
+                <div class="item-container"> 
+                    <i class="fa-regular fa-comment icon"></i>asdasada6sddsfs5s6d5f6sd5fs6df5sdkjjjjjjjjjjjjjjjjjjjjjjjjjjj
+                </div>
+            </li>
+        </ul>
+        <button nz-button nzBlock nz-dropdown [nzDropdownMenu]="menu" nzSize="large" class="sider-footer">
+            {{user?.first_name}} {{user?.last_name}}
+        </button>
+    </div>
+    <div  class="content-collapsed" *ngIf="!showSidebar">
+        <nz-row class="quizz-craft-simple-sidebar">
+            <nz-col>
+                <h2 class="quizz-craft-simple-sidebar">Quizz Craft </h2> 
+            </nz-col>
+            <nz-col class="icon-sidebar">
+                <i class="fa-solid fa-angles-right" (click)="showSidebar = true"></i>
+            </nz-col>
+        </nz-row>
+       
+        <div id="avatar" (click)="showSidebar = true" >
+            <nz-avatar [nzText]="user.first_name.charAt(0).toUpperCase()" ></nz-avatar>
+        </div>
+    </div>
+</ng-template>
 
 <nz-dropdown-menu #menu="nzDropdownMenu">
     <ul nz-menu class="options">
@@ -74,3 +102,4 @@
       </li>
     </ul>
   </nz-dropdown-menu>
+

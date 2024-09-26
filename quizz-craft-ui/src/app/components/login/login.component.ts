@@ -5,6 +5,7 @@ import { UntypedFormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -58,7 +59,20 @@ export class LoginComponent implements OnInit{
     }
     this.loading = true;
     let username = this.form.get('username').value;
-      let password = this.form.get('password').value;
+    let password = this.form.get('password').value;
+    let user:User = {
+      user_id: 7,
+      username: 'xavi_yaq',
+      email: 'xyanza@pentalab.tech',
+      first_name: 'Xavier',
+      last_name: 'Yanza'
+    } 
+    let response = {
+      token: 'ssd52DS5F',
+      user,
+    }
+      this.auth.setCredentials(response);
+
       /* this.auth.login(username,password).subscribe({
         next:(response) => {
           this.auth.setCredentials(response.data);

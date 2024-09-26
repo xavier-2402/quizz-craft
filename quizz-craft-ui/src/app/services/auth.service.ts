@@ -22,13 +22,10 @@ export class AuthService {
     this.token = null;
     localStorage.removeItem("data");
     localStorage.removeItem("tk");
-    localStorage.removeItem('companies');
-    localStorage.removeItem('company');
     this.router.navigate(['/login']);
   }
 
   setCredentials(credentials: any) {
-
     localStorage.setItem("data", JSON.stringify(credentials.user));
     localStorage.setItem("tk", credentials.token);
     this.getCredentials();
@@ -44,5 +41,10 @@ export class AuthService {
       this.user = JSON.parse(user);
       this.token = token;
     }
+  }
+
+  getUser():User{
+    let user = localStorage.getItem("data");
+    return JSON.parse(user);
   }
 }
