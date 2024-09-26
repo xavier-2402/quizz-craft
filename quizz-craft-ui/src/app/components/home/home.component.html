@@ -32,7 +32,7 @@
                     </div>
                 </li>
             </ul>
-            <button nz-button nzBlock nz-dropdown [nzDropdownMenu]="menu" class="sider-footer" nzTrigger="click">
+            <button nz-button nzBlock nz-dropdown [nzDropdownMenu]="menu" class="sider-footer">
                 Xavier Yanza
             </button>
         </div>
@@ -46,10 +46,8 @@
                 </nz-col>
             </nz-row>
            
-            <div id="avatar">
-                <a nz-dropdown [nzDropdownMenu]="menu">
-                    <nz-avatar nzText="U" ></nz-avatar>
-                </a>
+            <div id="avatar" (click)="showSidebar = true" >
+                <nz-avatar nzText="U" ></nz-avatar>
             </div>
         </div>
     </nz-sider>
@@ -57,20 +55,18 @@
 
     <nz-layout>
         <nz-content>
-            <nz-row nzJustify="center"  class="inner-content" [ngClass]="{'collapsed': !showSidebar, 'expanded': showSidebar}">
+            <nz-row nzJustify="center" class="inner-content" [ngClass]="{'collapsed': !showSidebar, 'expanded': showSidebar}">
                 <nz-col nzSpan="24" style="text-align: center;">
                     <router-outlet></router-outlet>
                 </nz-col>
             </nz-row>
-            <div>
-            </div>
         </nz-content>
     </nz-layout>
 </nz-layout>
 
 <nz-dropdown-menu #menu="nzDropdownMenu">
-    <ul nz-menu>
-      <li nz-menu-item class="options">
+    <ul nz-menu class="options">
+      <li nz-menu-item>
         <a [routerLink]="['/login']" > <span nz-icon nzType="logout" nzTheme="outline"></span> Cerrar sesión</a>
       </li>
       <li nz-menu-item>

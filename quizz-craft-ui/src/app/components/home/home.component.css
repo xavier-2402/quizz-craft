@@ -103,21 +103,17 @@ nz-avatar {
     flex-direction: column;
 }
 
-.options{
+.options li{
     border: 1px solid #9ea1a5;    
     border-radius: 10px;
     transition: box-shadow 0.3s;
     margin-bottom: 5px;
 }
 
-.options:hover {
-    background-color: #07294d;
+.options li:hover {
+    background-color: #aeaeae;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    color: #fff !important;
-}
-
-.item-list:hover {
     color: #fff !important;
 }
 
@@ -125,5 +121,4 @@ nz-avatar {
     margin-top: auto;
     box-sizing: border-box;
 }
-
 

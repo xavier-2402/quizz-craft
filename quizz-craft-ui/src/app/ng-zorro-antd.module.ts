@@ -12,6 +12,8 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+
 
 @NgModule({
     exports:[
@@ -27,7 +29,8 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
         NzLayoutModule,
         NzMenuModule,
         NzToolTipModule,
-        NzPopconfirmModule
+        NzPopconfirmModule,
+        NzMessageModule
     ]
 })
 export class NgZorroAntdModule {}
