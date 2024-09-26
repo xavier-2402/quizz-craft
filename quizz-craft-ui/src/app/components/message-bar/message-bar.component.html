@@ -6,7 +6,9 @@
             [(ngModel)]="userMessage" (keyup.enter)="manageMessage()" ></textarea>
         </nz-col>
         <nz-col nzSpan="1">
-            <button nz-button nzType="primary" (click)="manageMessage()"><span nz-icon nzType="send" nzTheme="outline"></span></button>
+            <button nz-button nzType="primary" [disabled]="!userMessage"  (click)="manageMessage()">
+                <span nz-icon nzType="send" nzTheme="outline"></span>
+            </button>
         </nz-col>
     </nz-row>
 </div>

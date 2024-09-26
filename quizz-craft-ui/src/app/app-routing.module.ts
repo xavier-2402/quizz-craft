@@ -4,6 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NewChatComponent } from './components/new-chat/new-chat.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { LoginComponent } from './components/login/login.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
     ]
   },
   { path: 'login', component:LoginComponent },
+  { path: 'forget-password', component:ForgetPasswordComponent },
   { path: '**', component:LoginComponent }
 ];
 

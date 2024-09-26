@@ -3,9 +3,8 @@
         [nzCollapsed]="!showSidebar"
         [nzCollapsedWidth]="150"
         [nzTrigger]="null"
+        [nzBreakpoint]="'md'"
         [nzWidth]="270"
-        (mouseleave)="onMouseOut()"
-        (mouseenter)="onMouseOver()"
         class="nz-sider">
 
         <div class="content-expanded" *ngIf="showSidebar">
@@ -14,7 +13,7 @@
                     <h2>Quizz Craft</h2>
                 </nz-col>
                 <nz-col class="icon-sidebar">
-                    <i [class]="isStatic ? 'fa-solid fa-angles-left' : 'fa-solid fa-thumbtack'" (click)="isStatic = !isStatic"></i>
+                    <i class="fa-solid fa-angles-left" (click)="showSidebar = false"></i>
                 </nz-col>
             </nz-row>
             <nz-row>
@@ -33,15 +32,36 @@
                     </div>
                 </li>
             </ul>
+            <button nz-button nzBlock nz-dropdown [nzDropdownMenu]="menu" class="sider-footer" nzTrigger="click">
+                Xavier Yanza
+                <nz-dropdown-menu #menu="nzDropdownMenu">
+                    <ul nz-menu class="options">
+                      <li nz-menu-item>
+                        <a [routerLink]="['/login']"> <span nz-icon nzType="logout" nzTheme="outline"></span> Cerrar sesión</a>
+                      </li>
+                      <li nz-menu-item>
+                        <a> <span nz-icon nzType="logout" nzTheme="outline"></span> Cerrar sesión</a>
+                      </li>
+                    </ul>
+                  </nz-dropdown-menu>
+            </button>
         </div>
         <div  class="content-collapsed" *ngIf="!showSidebar">
-            <h2 id="quizz-craft-simple-sidebar">Quizz Craft</h2>
+            <nz-row class="quizz-craft-simple-sidebar">
+                <nz-col>
+                    <h2 class="quizz-craft-simple-sidebar">Quizz Craft </h2> 
+                </nz-col>
+                <nz-col class="icon-sidebar">
+                    <i class="fa-solid fa-angles-right" (click)="showSidebar = true"></i>
+                </nz-col>
+            </nz-row>
+           
             <div id="avatar">
                 <nz-avatar nzText="U" ></nz-avatar>
             </div>
         </div>
-        
     </nz-sider>
+
 
     <nz-layout>
         <nz-content>

@@ -7,18 +7,8 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
-  showSidebar:boolean = false;
-  isStatic:boolean = false;
+  showSidebar:boolean = true;
 
-  onMouseOver(){
-    this.showSidebar = true;
-  }
-
-  onMouseOut(){
-    if(this.isStatic) return;
-    this.showSidebar = false;
-
-  }
 
 
 }

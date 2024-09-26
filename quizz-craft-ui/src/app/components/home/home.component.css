@@ -22,7 +22,7 @@
 } 
 
 
-#quizz-craft-simple-sidebar{
+.quizz-craft-simple-sidebar{
     color: #646566;
 }
 
@@ -36,6 +36,7 @@
 
 .icon-sidebar{
     margin-left: auto;
+    font-size: medium;
 }
 
 nz-avatar {
@@ -56,16 +57,17 @@ nz-avatar {
 }
 
 .custom-list li {
-    padding: 5px;
+    padding: 5px 10px;
     margin: 5px 0;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: box-shadow 0.3s;
 }
 
 .custom-list li:hover {
-    background-color: #aeaeae;
+    background-color: #07294d;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    color: #fff;
 }
 
 .item-list{
@@ -97,4 +99,26 @@ nz-avatar {
     padding: 10px;
     opacity: 1;
     transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
+
+.options li{
+    border: 1px solid #9ea1a5;    
+    border-radius: 10px;
+    transition: box-shadow 0.3s;
+    margin-bottom: 5px;
+}
+
+.options li:hover {
+    background-color: #07294d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    color: #fff !important;
+}
+
+.sider-footer{
+    margin-top: auto;
+    box-sizing: border-box;
+}
+

@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit{
     {img:'../../../assets/login/login2.svg'}
   ]
 
-  logo:string = '../../../assets/images/no-image.png';
   form:UntypedFormGroup; 
   passwordVisible = false; 
   password?: string;
