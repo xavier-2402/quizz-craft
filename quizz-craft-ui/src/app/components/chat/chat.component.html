@@ -8,7 +8,7 @@
                 </div>
               </nz-col>
             </nz-row>
-            <app-message-bar (sendMessage)="sendMessage($event)"></app-message-bar>
+            <app-message-bar [isLoading]="isLoading" (sendMessage)="sendMessage($event)"></app-message-bar>
           </div>
     </nz-col>
 </nz-row>

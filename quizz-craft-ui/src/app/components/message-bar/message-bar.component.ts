@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-message-bar',
@@ -10,7 +10,9 @@ export class MessageBarComponent {
   chatMessages: { message: string, sender: string }[] = [];
   @Output()
   sendMessage = new EventEmitter<string>;
-
+  @Input()
+  isLoading:boolean = false;
+  
   manageMessage() {
     if (this.userMessage.trim()) {
       this.sendMessage.emit(this.userMessage);

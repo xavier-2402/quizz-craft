@@ -3,10 +3,10 @@
         <nz-col mzMd="23" nzXs="21">
             <textarea nz-input placeholder="Escribe un mensaje..." class="input-textarea"
             [nzAutosize]="{ minRows: 2, maxRows: 6 }"
-            [(ngModel)]="userMessage" (keyup.enter)="manageMessage()" ></textarea>
+            [(ngModel)]="userMessage" (keyup.enter)="isLoading? null : manageMessage()" ></textarea>
         </nz-col>
         <nz-col nzMd="1" nzXs="3" style="margin-left: auto;">
-            <button nz-button nzType="primary" [disabled]="!userMessage"  (click)="manageMessage()">
+            <button nz-button nzType="primary" [disabled]="!userMessage" [nzLoading]="isLoading"  (click)="manageMessage()">
                 <span nz-icon nzType="send" nzTheme="outline"></span>
             </button>
         </nz-col>

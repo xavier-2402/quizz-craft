@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class ChatComponent {
   chatMessages: { message: string, sender: string }[] = [];
+  isLoading:boolean = false;
 
   sendMessage(message:string) {
     this.chatMessages.push({ message: message, sender: 'user' });
@@ -15,9 +16,11 @@ export class ChatComponent {
 
   getBotResponse(message: string) {
     // Simulando una respuesta del bot
+    this.isLoading = true;
     setTimeout(() => {
       const botMessage = `Bot: Respuesta al mensaje: "${message}"`;
       this.chatMessages.push({ message: botMessage, sender: 'bot' });
-    }, 1000);
+      this.isLoading = false;
+    }, 5000);
   }
 }
