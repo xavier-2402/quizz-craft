@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Interaction } from 'src/app/models/interaction';
 
 @Component({
   selector: 'app-chat',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent {
-  chatMessages: { message: string, sender: string }[] = [];
+  chatMessages: Interaction[] = [];
   isLoading:boolean = false;
 
   sendMessage(message:string) {
