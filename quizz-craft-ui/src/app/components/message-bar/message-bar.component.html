@@ -5,7 +5,7 @@
             [nzAutosize]="{ minRows: 2, maxRows: 6 }"
             [(ngModel)]="userMessage" (keyup.enter)="manageMessage()" ></textarea>
         </nz-col>
-        <nz-col nzMd="1" nzXs="3">
+        <nz-col nzMd="1" nzXs="3" style="margin-left: auto;">
             <button nz-button nzType="primary" [disabled]="!userMessage"  (click)="manageMessage()">
                 <span nz-icon nzType="send" nzTheme="outline"></span>
             </button>

@@ -22,6 +22,8 @@ export class ForgetPasswordComponent {
 
   password:string = null;
   secondPassword:string = null;
+  passwordVisible: boolean = false;
+  secondPasswordVisible: boolean = false;
 
   constructor(private msg: NzMessageService){
 

@@ -14,6 +14,7 @@ import {
     SendOutline,
     SettingOutline,
     UserOutline,
+    EyeInvisibleOutline
 } from '@ant-design/icons-angular/icons';
 
 const icons = [
@@ -29,6 +30,7 @@ const icons = [
     SendOutline,
     SettingOutline,
     UserOutline,
+    EyeInvisibleOutline
 ];
 
 @NgModule({
