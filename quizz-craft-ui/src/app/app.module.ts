@@ -16,6 +16,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { MessageBarComponent } from './components/message-bar/message-bar.component';
 import { LoginComponent } from './components/login/login.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { NewUserComponent } from './components/new-user/new-user.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
     ChatComponent,
     MessageBarComponent,
     LoginComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    NewUserComponent
   ],
   imports: [
     BrowserModule,

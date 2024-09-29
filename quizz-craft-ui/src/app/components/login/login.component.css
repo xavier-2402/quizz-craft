@@ -59,3 +59,8 @@ h3 {
     justify-content: center;
     flex-direction: column;
 }
+
+.new-account{
+    font-weight: bold;
+    color: #0095f6;
+}

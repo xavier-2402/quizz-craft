@@ -14,6 +14,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzFormModule } from 'ng-zorro-antd/form';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { NzResultModule } from 'ng-zorro-antd/result';
         NzToolTipModule,
         NzPopconfirmModule,
         NzMessageModule,
-        NzResultModule
+        NzResultModule,
+        NzFormModule
     ]
 })
 export class NgZorroAntdModule {}
