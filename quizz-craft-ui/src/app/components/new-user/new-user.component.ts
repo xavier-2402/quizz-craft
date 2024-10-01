@@ -15,7 +15,16 @@ export class NewUserComponent {
   section: number = 1;
   passwordVisible:boolean = false;
   secondPasswordVisible:boolean =false;
-
+  securityQuestions:any[] = [
+    {
+      title:'¿Cuál es el nombre de su mascota?',
+      answer: null
+    },
+    {
+      title:'¿Cuál es su bebida favorita?',
+      answer: null
+    }
+  ]
   constructor(private fb:UntypedFormBuilder, private msg:NzMessageService){
     this.buildForm();
   }
@@ -28,9 +37,9 @@ export class NewUserComponent {
     }); 
 
     this.passwordForm = this.fb.group({
-      username:[null,[Validators.required, Validators.minLength(7), Validators.maxLength(100)]],
-      password:[null,[Validators.required, Validators.minLength(7), Validators.maxLength(100)]],
-      secondPassword:[null,[Validators.required, Validators.minLength(7), Validators.maxLength(100)]],
+      username:[null,[Validators.required, Validators.minLength(5), Validators.maxLength(100), Validators.pattern(/(^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$)|(^[a-zA-Z0-9]{3,20}$)/)]],
+      password:[null,[Validators.required, Validators.minLength(8), Validators.maxLength(70), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')]],
+      secondPassword:[null,[Validators.required, Validators.minLength(8), Validators.maxLength(70),Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')]],
     });
   }
 
@@ -45,8 +54,6 @@ export class NewUserComponent {
   }
 
   verifyPasswords(){
-    console.log('asdjak');
-    
     if(!this.passwordForm.valid){
       this.msg.warning('Ingrese la información correcta');
       return;
@@ -69,5 +76,18 @@ export class NewUserComponent {
       this.verifyPasswords();
       return;
     }
+  }
+
+  verifyAnswers():boolean{
+    if(this.securityQuestions.filter(x => x.answer == null).length > 0){
+      this.msg.warning('Ingrese todos los valores')
+      return false;
+    }
+    return false;
+  }
+
+  saveUser(){
+    console.log(this.verifyAnswers());
+    
   }
 }

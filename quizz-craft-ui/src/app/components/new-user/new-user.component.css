@@ -35,3 +35,11 @@
     width: 100%;
     border-radius: 8px;
 }
+
+.item-question{
+    margin-top: 10px;
+}
+
+.section-questions{
+    margin-bottom: 20px;
+}
