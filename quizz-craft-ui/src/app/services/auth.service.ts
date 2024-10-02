@@ -14,7 +14,20 @@ export class AuthService {
   constructor(@Inject('BASE_URL') private baseUrl:string, private http:HttpClient, private router:Router) { }
 
   login(username:string, password: string):Observable<any>{
-    return this.http.post(`${this.baseUrl}api/auth/login`, null)
+    let login = {
+      username,
+      password
+    }
+    return this.http.post(`${this.baseUrl}api/user/login`, login);
+  }
+
+  verificate(username:string, password: string, code:number):Observable<any>{
+    let login = {
+      username,
+      password,
+      code
+    }
+    return this.http.post(`${this.baseUrl}api/user/verificate`, login)
   }
 
   logout() {

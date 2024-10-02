@@ -6,8 +6,8 @@ import { enableProdMode } from '@angular/core';
 
 export function getBaseUrl(){
   if(!environment.production)
-    return '';
-  return '';
+    return 'http://localhost:7065/';
+  return 'http://localhost:7065/';
 }
 
 export function getEnvironment(){

@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgZorroAntdModule } from './ng-zorro-antd.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { es_ES } from 'ng-zorro-antd/i18n';
 import { IconsProviderModule } from './icons-provider.module';
@@ -17,6 +17,7 @@ import { MessageBarComponent } from './components/message-bar/message-bar.compon
 import { LoginComponent } from './components/login/login.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { NewUserComponent } from './components/new-user/new-user.component';
+import { InterceptorService } from './core/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { NewUserComponent } from './components/new-user/new-user.component';
     IconsProviderModule,
   ],
   providers: [
-    { provide: NZ_I18N, useValue: es_ES }
+    { provide: NZ_I18N, useValue: es_ES },
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
   ],
   bootstrap: [AppComponent]
 })

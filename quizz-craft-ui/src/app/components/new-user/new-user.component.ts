@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { Question } from 'src/app/models/question';
 import { RegularExpressions } from 'src/app/models/regular-expressions';
 
 @Component({
@@ -15,16 +16,7 @@ export class NewUserComponent {
   section: number = 1;
   passwordVisible:boolean = false;
   secondPasswordVisible:boolean =false;
-  securityQuestions:any[] = [
-    {
-      title:'¿Cuál es el nombre de su mascota?',
-      answer: null
-    },
-    {
-      title:'¿Cuál es su bebida favorita?',
-      answer: null
-    }
-  ]
+  securityQuestions:Question[] = []
   constructor(private fb:UntypedFormBuilder, private msg:NzMessageService){
     this.buildForm();
   }

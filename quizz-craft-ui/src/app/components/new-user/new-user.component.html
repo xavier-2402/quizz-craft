@@ -83,8 +83,8 @@
                 <nz-row>
                     <b>Responda las siguientes preguntas de seguridad</b>
                     <nz-col nzSpan="24" *ngFor="let q of securityQuestions" class="item-question">
-                        <p>{{q.title}}</p>
-                        <input nz-input [placeholder]="q.title" [(ngModel)]="q.answer" class="question-input" />
+                        <p>{{q.name}}</p>
+                        <input nz-input [placeholder]="q.name" [(ngModel)]="q.answer" class="question-input" />
                     </nz-col>
                   </nz-row>
             </div>

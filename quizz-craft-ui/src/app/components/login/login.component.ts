@@ -24,6 +24,9 @@ export class LoginComponent implements OnInit{
   passwordVisible = false; 
   password?: string;
   loading:boolean = false;
+  section: number = 2;
+  verificationCode:string = '45826';
+  code:string;
 
   constructor(private fb:FormBuilder, private router: Router,
     private notification: NzNotificationService,
@@ -60,7 +63,7 @@ export class LoginComponent implements OnInit{
     this.loading = true;
     let username = this.form.get('username').value;
     let password = this.form.get('password').value;
-    let user:User = {
+   /*  let user:User = {
       user_id: 7,
       username: 'xavi_yaq',
       email: 'xyanza@pentalab.tech',
@@ -71,17 +74,19 @@ export class LoginComponent implements OnInit{
       token: 'ssd52DS5F',
       user,
     }
-      this.auth.setCredentials(response);
+      this.auth.setCredentials(response); */
 
-      /* this.auth.login(username,password).subscribe({
+      this.auth.login(username,password).subscribe({
         next:(response) => {
-          this.auth.setCredentials(response.data);
+          this.verificationCode = String(response.data);
+          console.log(this.verificationCode);
+          
+          this.section = 2;
+          //this.auth.setCredentials(response.data);
           this.loading = false;
-          this.router.navigate(['/']);
+          //this.router.navigate(['/']);
         },error:() => this.loading = false
-      }) */
-      this.loading = false;
-      this.router.navigate(['/']);
+      })
   }
 
 }
