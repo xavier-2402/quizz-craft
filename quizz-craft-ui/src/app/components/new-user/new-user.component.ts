@@ -29,9 +29,9 @@ export class NewUserComponent {
     }); 
 
     this.passwordForm = this.fb.group({
-      username:[null,[Validators.required, Validators.minLength(5), Validators.maxLength(100), Validators.pattern(/(^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$)|(^[a-zA-Z0-9]{3,20}$)/)]],
-      password:[null,[Validators.required, Validators.minLength(8), Validators.maxLength(70), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')]],
-      secondPassword:[null,[Validators.required, Validators.minLength(8), Validators.maxLength(70),Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$')]],
+      username:[null,[Validators.required, Validators.minLength(5), Validators.maxLength(100), Validators.pattern(RegularExpressions.REG_EXP_USER)]],
+      password:[null,[Validators.required, Validators.minLength(8), Validators.maxLength(70), Validators.pattern(RegularExpressions.REG_EXP_PASSWORD)]],
+      secondPassword:[null,[Validators.required, Validators.minLength(8), Validators.maxLength(70),Validators.pattern(RegularExpressions.REG_EXP_PASSWORD)]],
     });
   }
 

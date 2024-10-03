@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { User } from '../models/user';
 
 @Injectable({
@@ -60,4 +60,10 @@ export class AuthService {
     let user = localStorage.getItem("data");
     return JSON.parse(user);
   }
+
+  
+  isLogin(): Observable<any> {
+    return of({ authenticated: this.user && this.token ? true : false });
+  }
+
 }

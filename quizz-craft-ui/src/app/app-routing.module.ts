@@ -6,12 +6,13 @@ import { ChatComponent } from './components/chat/chat.component';
 import { LoginComponent } from './components/login/login.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 import { NewUserComponent } from './components/new-user/new-user.component';
+import { authGuard } from './core/auth.guard';
 
 const routes: Routes = [
   {
     path:'',component:HomeComponent, children:[
-      { path:'',component:NewChatComponent },
-      { path:'chat',component:ChatComponent }
+      { path:'',component:NewChatComponent, canActivate: [authGuard] },
+      { path:'chat',component:ChatComponent, canActivate: [authGuard] }
     ]
   },
   { path: 'login', component:LoginComponent },

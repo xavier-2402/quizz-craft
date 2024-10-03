@@ -100,6 +100,8 @@ export class LoginComponent implements OnInit{
     this.auth.verificate(username,password,Number(this.code)).subscribe({
       next:(response)=>{
         this.auth.setCredentials(response.data);
+        console.log(response);
+        
         this.router.navigate(['/']);
       },error:() => this.msg.error('Información incorrecta')
     })
