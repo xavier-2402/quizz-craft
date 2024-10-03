@@ -1,6 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Conversation } from 'src/app/models/conversation';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { ConversationService } from 'src/app/services/conversation.service';
 
 @Component({
   selector: 'app-home',
@@ -12,31 +14,27 @@ export class HomeComponent implements OnInit {
   showSidebar:boolean = true;
   user:User;
   isMobile: boolean = false;
-
-  constructor(private auth:AuthService){
+  conversations:Conversation[] = [];
+  constructor(private auth:AuthService, private conversationService:ConversationService){
 
   }
 
   ngOnInit(): void {
     this.user = this.auth.getUser();
-    let width = window.innerWidth;
-    if(width < 768){
-      this.isMobile = true;
-    }else
-      this.isMobile = false;
+    this.getConversations();
   }
 
   close(){
     this.showSidebar = false;
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    let width = window.innerWidth;
-    if(width < 768){
-      this.isMobile = true;
-    }else 
-      this.isMobile = false
+  getConversations(){
+    this.conversations = [];
+    this.conversationService.getConversationsByUser().subscribe({
+      next:(response)=>{
+        this.conversations = response.data;
+      }
+    })
   }
 
 }
