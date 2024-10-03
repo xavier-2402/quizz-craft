@@ -47,7 +47,10 @@
           <nz-row class="qr-code" nzJustify="center">
             <p style="width: 70%;">Escanee el código QR e ingrese el valor</p>   
             <nz-qrcode [nzValue]="verificationCode" nzColor="#07294d" ></nz-qrcode>
-            <input nz-input  class="input-qr-value" [(ngModel)]="code" maxlength="5">
+            <input nz-input [ngClass]="!isCodeValid ? 'input-qr-value wrong-code':'input-qr-value'"
+             [(ngModel)]="code" 
+             maxlength="5"
+             (keyup)="validateCode()">
           </nz-row>       
         </nz-col>
         

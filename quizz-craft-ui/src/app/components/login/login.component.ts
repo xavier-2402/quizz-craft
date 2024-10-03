@@ -4,7 +4,9 @@ import { FormBuilder } from '@angular/forms';
 import { UntypedFormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { RegularExpressions } from 'src/app/models/regular-expressions';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -24,14 +26,16 @@ export class LoginComponent implements OnInit{
   passwordVisible = false; 
   password?: string;
   loading:boolean = false;
-  section: number = 2;
-  verificationCode:string = '45826';
+  section: number = 1;
+  verificationCode:string;
   code:string;
+  isCodeValid:boolean = true;
 
   constructor(private fb:FormBuilder, private router: Router,
     private notification: NzNotificationService,
     private _sanitizer: DomSanitizer,
-    private auth:AuthService){
+    private auth:AuthService,
+    private msg:NzMessageService){
     this.form = this.fb.group({
       username: [null, [Validators.required]],
       password: [null, [Validators.required]]
@@ -63,30 +67,42 @@ export class LoginComponent implements OnInit{
     this.loading = true;
     let username = this.form.get('username').value;
     let password = this.form.get('password').value;
-   /*  let user:User = {
-      user_id: 7,
-      username: 'xavi_yaq',
-      email: 'xyanza@pentalab.tech',
-      first_name: 'Xavier',
-      last_name: 'Yanza'
-    } 
-    let response = {
-      token: 'ssd52DS5F',
-      user,
-    }
-      this.auth.setCredentials(response); */
 
       this.auth.login(username,password).subscribe({
         next:(response) => {
           this.verificationCode = String(response.data);
-          console.log(this.verificationCode);
-          
           this.section = 2;
-          //this.auth.setCredentials(response.data);
           this.loading = false;
-          //this.router.navigate(['/']);
         },error:() => this.loading = false
       })
+  }
+
+  validateCode(){
+    if( !this.code || this.code.length != 5){
+      this.isCodeValid = false;
+      return;
+    }
+    if(!RegularExpressions.REG_EXP_NUMBERS.test(this.code)){
+      this.isCodeValid = false;
+      this.msg.error('Código incorrecto');
+      return;
+    }
+
+    if(this.code != this.verificationCode){
+      this.isCodeValid = false;
+      this.msg.error('Código incorrecto');
+      return;
+    }
+    this.isCodeValid = true;
+
+    let username = this.form.get('username').value;
+    let password = this.form.get('password').value;
+    this.auth.verificate(username,password,Number(this.code)).subscribe({
+      next:(response)=>{
+        this.auth.setCredentials(response.data);
+        this.router.navigate(['/']);
+      },error:() => this.msg.error('Información incorrecta')
+    })
   }
 
 }

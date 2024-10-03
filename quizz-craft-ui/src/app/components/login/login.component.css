@@ -71,4 +71,9 @@ h3 {
 .input-qr-value{
     width: 70%;
     border-radius: 12px;
+    margin-top: 12px;
+}
+
+.wrong-code{
+    border-color: red;
 }
