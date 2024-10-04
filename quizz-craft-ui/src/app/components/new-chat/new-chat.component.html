@@ -15,7 +15,7 @@
                 </nz-row>
               </nz-col>
             </nz-row>
-            <app-message-bar></app-message-bar>
+            <app-message-bar (sendMessage)="handleMessage($event)"></app-message-bar>
           </div>
     </nz-col>
 </nz-row>

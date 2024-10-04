@@ -13,6 +13,8 @@ export class ChatComponent implements OnInit{
   chatMessages: Interaction[] = [];
   isLoading:boolean = false;
   id:string = '';
+  disableButton:boolean = false;
+  cleanMessage:boolean = false;
 
   constructor(private route:ActivatedRoute, private readonly service:ConversationService,
     private readonly msg:NzMessageService
@@ -28,6 +30,9 @@ export class ChatComponent implements OnInit{
       if (newId !== this.id) {
         this.id = newId!; 
         this.getInteractions();
+        this.cleanMessage = true;
+      }else{
+        this.cleanMessage = false;
       }
     });
     this.getInteractions();
@@ -52,6 +57,10 @@ export class ChatComponent implements OnInit{
     this.service.getInteractionsByConversationId(this.id).subscribe({
       next:(response)=>{
         this.chatMessages = response.data;
+        if(this.chatMessages.length == 0) return;
+        let message = this.chatMessages[this.chatMessages.length -1];
+        if(message.sender == 'user') this.disableButton = true;
+        else this.disableButton = false;
       },error:() => this.msg.error('Ocurrió un error al obtener el detalle')
     })
   }
