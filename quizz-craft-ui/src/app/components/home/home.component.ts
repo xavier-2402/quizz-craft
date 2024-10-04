@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Conversation } from 'src/app/models/conversation';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,11 +16,12 @@ export class HomeComponent implements OnInit {
   user:User;
   isMobile: boolean = false;
   conversations:Conversation[] = [];
-  constructor(private auth:AuthService, private conversationService:ConversationService){
+
+  constructor(private auth:AuthService, private conversationService:ConversationService, private route:ActivatedRoute){
 
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.user = this.auth.getUser();
     this.getConversations();
   }

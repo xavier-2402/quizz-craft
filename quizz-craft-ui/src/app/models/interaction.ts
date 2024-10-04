@@ -1,8 +1,8 @@
 export interface Interaction{
     interaction_id?:number;
-    question?: string;
-    response?: string;
     conversation_id?: string;
+    id?:string;
+    created_at?:Date;
     sender:string;
     message: string;
 }

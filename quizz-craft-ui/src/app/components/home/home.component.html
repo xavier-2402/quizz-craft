@@ -61,7 +61,7 @@
         </nz-row>
         <h3 class="item-sidebar">Recientes</h3>
         <ul class="custom-list">
-            <li class="item-list" [routerLink]="['/chat']" *ngFor="let c of conversations">
+            <li class="item-list" [routerLink]="['/chat', c.id]" *ngFor="let c of conversations">
                 <div class="item-container">
                     <i class="fa-regular fa-comment icon"></i> {{c.tile}}
                 </div>

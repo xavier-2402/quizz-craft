@@ -14,4 +14,8 @@ export class ConversationService {
   getConversationsByUser():Observable<any>{
     return this.http.get(`${this.baseUrl}api/${ApiIntegrations.CONVERSATION_API}/get-all-by-user`)
   }
+
+  getInteractionsByConversationId(conversationId:string):Observable<any>{
+    return this.http.get(`${this.baseUrl}api/${ApiIntegrations.CONVERSATION_API}/by/id/${conversationId}`)
+  }
 }
