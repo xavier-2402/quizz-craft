@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { Interaction } from 'src/app/models/interaction';
 import { ConversationService } from 'src/app/services/conversation.service';
 
@@ -13,13 +14,22 @@ export class ChatComponent implements OnInit{
   isLoading:boolean = false;
   id:string = '';
 
-  constructor(private route:ActivatedRoute, private readonly service:ConversationService){
+  constructor(private route:ActivatedRoute, private readonly service:ConversationService,
+    private readonly msg:NzMessageService
+  ){
     
   }
 
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
+    this.route.paramMap.subscribe(params => {
+      const newId = params.get('id'); 
+      if (newId !== this.id) {
+        this.id = newId!; 
+        this.getInteractions();
+      }
+    });
     this.getInteractions();
   }
 
@@ -41,9 +51,8 @@ export class ChatComponent implements OnInit{
   getInteractions(){
     this.service.getInteractionsByConversationId(this.id).subscribe({
       next:(response)=>{
-        console.log(response);
         this.chatMessages = response.data;
-      }
+      },error:() => this.msg.error('Ocurrió un error al obtener el detalle')
     })
   }
 }

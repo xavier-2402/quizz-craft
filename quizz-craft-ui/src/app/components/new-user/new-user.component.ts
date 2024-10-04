@@ -1,24 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NewUser } from 'src/app/models/new-user';
 import { Question } from 'src/app/models/question';
+import { QuestionUser } from 'src/app/models/question-user';
 import { RegularExpressions } from 'src/app/models/regular-expressions';
+import { QuestionService } from 'src/app/services/question.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-new-user',
   templateUrl: './new-user.component.html',
   styleUrls: ['./new-user.component.css']
 })
-export class NewUserComponent {
+export class NewUserComponent implements OnInit{
 
   form:UntypedFormGroup;
   passwordForm:UntypedFormGroup;
   section: number = 1;
   passwordVisible:boolean = false;
   secondPasswordVisible:boolean =false;
-  securityQuestions:Question[] = []
-  constructor(private fb:UntypedFormBuilder, private msg:NzMessageService){
+  securityQuestions:Question[] = [];
+  enableSave:boolean = false;
+  constructor(private fb:UntypedFormBuilder, private msg:NzMessageService, private readonly questionService:QuestionService,
+    private readonly userService:UserService
+  ){
     this.buildForm();
+  }
+
+  ngOnInit(): void {
+    this.getQuestions();
   }
 
   buildForm(){
@@ -79,7 +90,47 @@ export class NewUserComponent {
   }
 
   saveUser(){
-    console.log(this.verifyAnswers());
-    
+    if(!this.form.valid || !this.passwordForm.valid){
+      this.msg.warning('Ingrese la información necesaria');
+    }
+
+    if(this.securityQuestions.filter(x => x.answer).length < 3){
+      this.msg.warning('Responda al menos 3 preguntas');
+      return;
+    }
+
+    let questions: QuestionUser[] = []
+    for (const question of this.securityQuestions.filter(x => x.answer)) {
+      questions.push({code:question.question_id, question: question.name, response: question.answer})
+    }
+
+    let user:NewUser={
+      username: this.passwordForm.get('username').value,
+      password: this.passwordForm.get('password').value,
+      first_name: this.form.get('first_name').value,
+      last_name: this.form.get('last_name').value,
+      email: this.form.get('email').value,
+      questions
+    }
+
+    this.userService.addUser(user).subscribe({
+      next:()=>{
+        this.section = 4;
+      }
+    })
+
+  }
+
+  validateQuestions(){
+    this.enableSave = this.securityQuestions.filter(x => x.answer).length >= 3
+  }
+
+  getQuestions(){
+    this.securityQuestions = [];
+    this.questionService.getQuestions().subscribe({
+      next:(response)=>{
+        this.securityQuestions = response.data;
+      }
+    })
   }
 }

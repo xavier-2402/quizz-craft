@@ -81,17 +81,27 @@
             </div>
             <div *ngIf="section == 3" class="section-questions">
                 <nz-row>
-                    <b>Responda las siguientes preguntas de seguridad</b>
+                    <b>Responda al menos 3 de las siguientes preguntas de seguridad</b>
                     <nz-col nzSpan="24" *ngFor="let q of securityQuestions" class="item-question">
                         <p>{{q.name}}</p>
-                        <input nz-input [placeholder]="q.name" [(ngModel)]="q.answer" class="question-input" />
+                        <input nz-input [placeholder]="q.name" [(ngModel)]="q.answer" class="question-input" (ngModelChange)="validateQuestions()"/>
                     </nz-col>
                   </nz-row>
             </div>
-            <nz-row nzJustify="center" style="width: 100%;">
+            <nz-row *ngIf="section == 4">
+                <nz-result
+                nzStatus="success"
+                nzTitle="Usuario creado correctamente"
+                style=" width:100%">
+                  <div nz-result-extra>
+                    <button nz-button nzType="primary" [routerLink]="['/login']">Iniciar sesión</button>
+                  </div>
+                </nz-result>
+              </nz-row>
+            <nz-row nzJustify="center" style="width: 100%;" *ngIf="section != 4">
                 <button nz-button nzType="primary" class="btn-new-user" *ngIf="section <= 3 && section > 1" (click)="section = section -1;">Anterior</button>
                 <button nz-button nzType="primary" class="btn-new-user" *ngIf="section <= 2" (click)="next()">Siguiente</button>
-                <button nz-button nzType="primary" class="btn-new-user" *ngIf="section == 3" (click)="saveUser()">Crear usuario</button>
+                <button nz-button nzType="primary" class="btn-new-user" *ngIf="section == 3" [disabled]="!enableSave" (click)="saveUser()">Crear usuario</button>
             </nz-row>
         </nz-card>
     </nz-col>
