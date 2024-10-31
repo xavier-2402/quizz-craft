@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NewUser } from 'src/app/models/new-user';
 import { Question } from 'src/app/models/question';
 import { QuestionUser } from 'src/app/models/question-user';
 import { RegularExpressions } from 'src/app/models/regular-expressions';
 import { QuestionService } from 'src/app/services/question.service';
+import { SettingsService } from 'src/app/services/settings.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -22,14 +24,20 @@ export class NewUserComponent implements OnInit{
   secondPasswordVisible:boolean =false;
   securityQuestions:Question[] = [];
   enableSave:boolean = false;
+  array:any[]=[];
+
   constructor(private fb:UntypedFormBuilder, private msg:NzMessageService, private readonly questionService:QuestionService,
-    private readonly userService:UserService
+    private readonly userService:UserService, private readonly settings: SettingsService, private readonly _sanitizer: DomSanitizer
   ){
     this.buildForm();
+    this.array = this.settings.getImagesCarrousel();
   }
 
   ngOnInit(): void {
     this.getQuestions();
+    this.array.forEach(x=>{
+      x['urlsafe'] = this._sanitizer.bypassSecurityTrustResourceUrl(x.img);
+    });
   }
 
   buildForm(){
