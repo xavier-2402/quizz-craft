@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { RegularExpressions } from 'src/app/models/regular-expressions';
-import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-login',
@@ -17,10 +17,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit{
 
-  array:any[]=[
-    {img:'../../../assets/login/login1.svg'},
-    {img:'../../../assets/login/login2.svg'}
-  ]
+  array:any[]=[];
 
   form:UntypedFormGroup; 
   passwordVisible = false; 
@@ -35,11 +32,13 @@ export class LoginComponent implements OnInit{
     private notification: NzNotificationService,
     private _sanitizer: DomSanitizer,
     private auth:AuthService,
-    private msg:NzMessageService){
+    private msg:NzMessageService,
+    private settings: SettingsService){
     this.form = this.fb.group({
       username: [null, [Validators.required]],
       password: [null, [Validators.required]]
     });
+    this.array = settings.getImagesCarrousel();
   }
 
   ngOnInit(): void {

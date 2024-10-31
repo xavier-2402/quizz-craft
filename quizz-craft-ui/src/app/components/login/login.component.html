@@ -1,13 +1,13 @@
 <div class="login-container" >
     <div nz-row style="height: 100%;">
-        <div nz-col nzMd="16" nzXs="24">            
-              <nz-carousel nzDotPosition="bottom" nzAutoPlay>
-                <div nz-carousel-content *ngFor="let index of array">
-                 <object [data]="index.urlsafe" style="width:40%"> </object>
-                </div>
-              </nz-carousel>
+        <div nz-col nzMd="14" nzXs="24">            
+          <nz-carousel nzDotPosition="bottom" nzAutoPlay>
+            <div nz-carousel-content *ngFor="let index of array">
+              <img [src]="index.urlsafe" style="max-width: 70%; max-height: 70%;" >
+            </div>
+          </nz-carousel>
         </div>
-        <nz-col nzMd="8" nzXs="24" class="login-section" *ngIf="section == 1" >
+        <nz-col nzMd="10" nzXs="24" class="login-section" *ngIf="section == 1" >
           <img src="../../../assets/images/ista.png" alt="logo-ktk" width="100%" id="img-logo" onerror="this.src='../../../assets/images/no-image.png'">          
           <form nz-form [formGroup]="form" class="login-form" (ngSubmit)="submitForm()">
             <nz-form-item>
@@ -42,7 +42,7 @@
             <p>¿No tienes una cuenta? <a routerLink="/new-user" class="new-account">Regístrate</a></p>
           </div>
         </nz-col>
-        <nz-col  nzMd="8" nzXs="24" class="login-section" *ngIf="section == 2">
+        <nz-col  nzMd="10" nzXs="24" class="login-section" *ngIf="section == 2">
           <img src="../../../assets/images/ista.png" alt="logo-ktk" width="100%" id="img-logo" onerror="this.src='../../../assets/images/no-image.png'">
           <nz-row class="qr-code" nzJustify="center">
             <p style="width: 70%;">Escanee el código QR e ingrese el valor</p>   

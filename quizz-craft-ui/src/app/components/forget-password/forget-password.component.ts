@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-forget-password',
   templateUrl: './forget-password.component.html',
   styleUrls: ['./forget-password.component.css']
 })
-export class ForgetPasswordComponent {
+export class ForgetPasswordComponent implements OnInit {
   title: string = '';
   section: number = 1;
   securityQuestions:any[] = [
@@ -24,9 +26,17 @@ export class ForgetPasswordComponent {
   secondPassword:string = null;
   passwordVisible: boolean = false;
   secondPasswordVisible: boolean = false;
+  array:any[]=[];
 
-  constructor(private msg: NzMessageService){
-
+  constructor(private msg: NzMessageService,
+    private readonly settings: SettingsService,
+    private _sanitizer: DomSanitizer){
+    this.array = this.settings.getImagesCarrousel();
+  }
+  ngOnInit(): void {
+    this.array.forEach(x=>{
+      x['urlsafe'] = this._sanitizer.bypassSecurityTrustResourceUrl(x.img);
+    });
   }
 
   verifyAnswers(){
