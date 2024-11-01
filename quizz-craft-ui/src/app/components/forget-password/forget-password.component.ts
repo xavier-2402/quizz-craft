@@ -27,6 +27,7 @@ export class ForgetPasswordComponent implements OnInit {
   passwordVisible: boolean = false;
   secondPasswordVisible: boolean = false;
   array:any[]=[];
+  username: string;
 
   constructor(private msg: NzMessageService,
     private readonly settings: SettingsService,
@@ -39,12 +40,20 @@ export class ForgetPasswordComponent implements OnInit {
     });
   }
 
+  verifyuser(){
+    if(!this.username){
+      this.msg.warning('Ingrese un nombre de usuario');
+      return;
+    }
+    this.section = 2;
+  }
+
   verifyAnswers(){
     if(this.securityQuestions.filter(x => x.answer == null).length > 0){
       this.msg.warning('Ingrese todos los valores')
       return;
     }
-    this.section = 2;
+    this.section = 3;
   }
 
   isValid():boolean{
@@ -54,6 +63,6 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   updatePassword(){
-    this.section = 3;
+    this.section = 4;
   }
 }
