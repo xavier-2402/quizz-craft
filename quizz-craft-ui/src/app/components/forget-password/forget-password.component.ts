@@ -3,6 +3,7 @@ import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { QuestionUser } from 'src/app/models/question-user';
+import { RegularExpressions } from 'src/app/models/regular-expressions';
 import { User } from 'src/app/models/user';
 import { UserQuestionDto } from 'src/app/models/user-question-dto';
 import { SettingsService } from 'src/app/services/settings.service';
@@ -36,8 +37,8 @@ export class ForgetPasswordComponent implements OnInit {
     private fb:FormBuilder){
     this.array = this.settings.getImagesCarrousel();
     this.form = this.fb.group({
-      password: [null,[Validators.required]],
-      second_password: [null,[Validators.required]]
+      password: [null,[Validators.required, Validators.minLength(8), Validators.maxLength(70), Validators.pattern(RegularExpressions.REG_EXP_PASSWORD)]],
+      second_password: [null,[Validators.required, Validators.minLength(8), Validators.maxLength(70), Validators.pattern(RegularExpressions.REG_EXP_PASSWORD)]]
     })
   }
 
@@ -95,7 +96,6 @@ export class ForgetPasswordComponent implements OnInit {
     }
     this.userService.updatePassword(user).subscribe({
       next:()=>{
-        this.msg.success('Contraseña actualizada');
         this.section = 4;
       }
     })
