@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { QuestionUser } from 'src/app/models/question-user';
+import { UserQuestionDto } from 'src/app/models/user-question-dto';
 import { SettingsService } from 'src/app/services/settings.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-forget-password',
@@ -11,16 +14,7 @@ import { SettingsService } from 'src/app/services/settings.service';
 export class ForgetPasswordComponent implements OnInit {
   title: string = '';
   section: number = 1;
-  securityQuestions:any[] = [
-    {
-      title:'¿Cuál es el nombre de su mascota?',
-      answer: null
-    },
-    {
-      title:'¿Cuál es su bebida favorita?',
-      answer: null
-    }
-  ]
+  securityQuestions:QuestionUser[] = [];
 
   password:string = null;
   secondPassword:string = null;
@@ -28,12 +22,17 @@ export class ForgetPasswordComponent implements OnInit {
   secondPasswordVisible: boolean = false;
   array:any[]=[];
   username: string;
+  userFinded: UserQuestionDto;
+  showVerify: boolean = false;
 
   constructor(private msg: NzMessageService,
     private readonly settings: SettingsService,
-    private _sanitizer: DomSanitizer){
+    private _sanitizer: DomSanitizer,
+    private userService: UserService){
     this.array = this.settings.getImagesCarrousel();
   }
+
+
   ngOnInit(): void {
     this.array.forEach(x=>{
       x['urlsafe'] = this._sanitizer.bypassSecurityTrustResourceUrl(x.img);
@@ -45,11 +44,11 @@ export class ForgetPasswordComponent implements OnInit {
       this.msg.warning('Ingrese un nombre de usuario');
       return;
     }
-    this.section = 2;
+    this.rememberUser(true);
   }
 
   verifyAnswers(){
-    if(this.securityQuestions.filter(x => x.answer == null).length > 0){
+    if(this.securityQuestions.filter(x => x.response == null).length > 0){
       this.msg.warning('Ingrese todos los valores')
       return;
     }
@@ -64,5 +63,31 @@ export class ForgetPasswordComponent implements OnInit {
 
   updatePassword(){
     this.section = 4;
+  }
+
+  rememberUser(manageSection:boolean = false){
+    this.userService.remember(this.username).subscribe({
+      next:(response)=>{
+        this.userFinded = response.data;
+        if(this.userFinded == null) this.msg.error('No se encontró un usuario registrado');
+        this.securityQuestions = this.userFinded.questions;
+        if(manageSection) this.section = 2;
+
+      },error:(err)=>{
+        if( err.error && err.error.message){
+          this.msg.error(err.error.message)
+          return;
+        }
+        this.msg.error('Ocurrió un error al buscar al usuario')
+      }
+    })
+  }
+
+  manageAnswers(){
+    if(this.securityQuestions.filter(x => x.response == null).length == 0){
+      this.showVerify = true;
+      return;
+    }
+    this.showVerify = false;
   }
 }

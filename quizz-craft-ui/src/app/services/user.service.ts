@@ -18,7 +18,7 @@ export class UserService {
   }
 
   remember(username:string):Observable<any>{
-    return this.http.get(`${this.baseUrl}/api/${ApiIntegrations.USER_API}/remember/${username}`);
+    return this.http.get(`${this.baseUrl}api/${ApiIntegrations.USER_API}/remember/${username}`);
   }
 
   verifyAnswers(item: UserQuestionDto){
