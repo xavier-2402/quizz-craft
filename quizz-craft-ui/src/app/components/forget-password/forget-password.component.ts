@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { QuestionUser } from 'src/app/models/question-user';
+import { User } from 'src/app/models/user';
 import { UserQuestionDto } from 'src/app/models/user-question-dto';
 import { SettingsService } from 'src/app/services/settings.service';
 import { UserService } from 'src/app/services/user.service';
@@ -24,12 +26,19 @@ export class ForgetPasswordComponent implements OnInit {
   username: string;
   userFinded: UserQuestionDto;
   showVerify: boolean = false;
+  form:UntypedFormGroup;
+  isValid:boolean = false;
 
   constructor(private msg: NzMessageService,
     private readonly settings: SettingsService,
     private _sanitizer: DomSanitizer,
-    private userService: UserService){
+    private userService: UserService, 
+    private fb:FormBuilder){
     this.array = this.settings.getImagesCarrousel();
+    this.form = this.fb.group({
+      password: [null,[Validators.required]],
+      second_password: [null,[Validators.required]]
+    })
   }
 
 
@@ -37,6 +46,19 @@ export class ForgetPasswordComponent implements OnInit {
     this.array.forEach(x=>{
       x['urlsafe'] = this._sanitizer.bypassSecurityTrustResourceUrl(x.img);
     });
+
+    this.form.valueChanges.subscribe({
+      next:()=>{
+        if(!this.form.valid){ 
+          this.isValid = false;
+          return;
+        }
+        this.password = this.form.get('password')?.value;
+        this.secondPassword = this.form.get('second_password')?.value;
+
+        this.isValid = this.password == this.secondPassword;
+      }
+    })
   }
 
   verifyuser(){
@@ -63,14 +85,20 @@ export class ForgetPasswordComponent implements OnInit {
     })
   }
 
-  isValid():boolean{
-    if(this.password == null) return false;
-    if(this.secondPassword == null) return false;
-    return this.password == this.secondPassword;
-  }
 
   updatePassword(){
-    this.section = 4;
+    const user: User = {
+      user_id: this.userFinded.userId,
+      id: this.userFinded.id,
+      username: this.userFinded.username,
+      password_hash: this.password
+    }
+    this.userService.updatePassword(user).subscribe({
+      next:()=>{
+        this.msg.success('Contraseña actualizada');
+        this.section = 4;
+      }
+    })
   }
 
   rememberUser(manageSection:boolean = false){
