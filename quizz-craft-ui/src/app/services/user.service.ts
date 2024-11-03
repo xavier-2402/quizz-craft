@@ -21,7 +21,7 @@ export class UserService {
     return this.http.get(`${this.baseUrl}api/${ApiIntegrations.USER_API}/remember/${username}`);
   }
 
-  verifyAnswers(item: UserQuestionDto){
+  verifyAnswers(item: UserQuestionDto):Observable<any>{
     return this.http.post(`${this.baseUrl}api/${ApiIntegrations.USER_API}/remember/result`,item);
   }
 

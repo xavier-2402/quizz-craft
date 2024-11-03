@@ -52,7 +52,15 @@ export class ForgetPasswordComponent implements OnInit {
       this.msg.warning('Ingrese todos los valores')
       return;
     }
-    this.section = 3;
+    this.userService.verifyAnswers(this.userFinded).subscribe({
+      next:(response)=> {
+        if(!response.data){
+          this.msg.error('Información Incorrecta');
+          return;
+        }
+        this.section = 3;
+      }
+    })
   }
 
   isValid():boolean{
